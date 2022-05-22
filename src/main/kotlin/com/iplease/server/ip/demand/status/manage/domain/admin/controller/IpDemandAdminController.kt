@@ -1,6 +1,6 @@
-package com.iplease.server.ip.demand.status.manage.controller
+package com.iplease.server.ip.demand.status.manage.domain.admin.controller
 
-import com.iplease.server.ip.demand.status.manage.service.IpDemandAdminService
+import com.iplease.server.ip.demand.status.manage.domain.admin.service.IpDemandAdminService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
