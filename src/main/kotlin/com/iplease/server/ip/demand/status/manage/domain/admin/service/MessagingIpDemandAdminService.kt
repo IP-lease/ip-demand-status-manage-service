@@ -29,7 +29,7 @@ class MessagingIpDemandAdminService(
                     it.ipFirst, it.ipSecond, it.ipThird, it.ipFourth
                 )
             }.map { jacksonObjectMapper().writeValueAsString(it) } //Event 변환로직
-            .map { messagePublishService.subscribe(IpDemandEventTypeV1.IP_DEMAND_SUCCESS.routingKey, it) } //Event 발행로직
+            .map { messagePublishService.publish(IpDemandEventTypeV1.IP_DEMAND_SUCCESS.routingKey, it) } //Event 발행로직
 
     //만약 해당 UUID 가진 IP신청이 없다면 Mono.error(UnknownDemandException) 을 반환한다
     //만약 해당 UUID를 가진 IP신청이 있다면 IpDemandFailedEvent를 발행한다.
@@ -39,5 +39,5 @@ class MessagingIpDemandAdminService(
                 if (!isExists) Mono.error(UnknownDemandException(demandUuid)) //만약 해당 UUID를 가진 IP신청이 없다면 Mono.error(UnknownDemandException) 을 반환한다
                 else IpDemandFailedEvent(demandUuid).toMono() //만약 해당 UUID를 가진 IP신청이 있다면 IpDemandFailedEvent를 발행한다. Event 구성로직
             }.map { jacksonObjectMapper().writeValueAsString(it) } //Event 변환로직
-            .map { messagePublishService.subscribe(IpDemandEventTypeV1.IP_DEMAND_FAILED.routingKey, it) } //Event 발행로직
+            .map { messagePublishService.publish(IpDemandEventTypeV1.IP_DEMAND_FAILED.routingKey, it) } //Event 발행로직
 }
