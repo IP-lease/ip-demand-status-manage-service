@@ -35,5 +35,5 @@ abstract class SimpleMessageListener<T: Any>(
             .doOnError{ messagePublishService.publish(GlobalErrorTypeV1.WRONG_PAYLOAD.routingKey, WrongPayloadError(it.message!!)) }
             .onErrorResume { Mono.empty() }
 
-    abstract fun <T> handle(it: T)
+    abstract fun handle(data: T)
 }
