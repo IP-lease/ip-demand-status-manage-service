@@ -1,5 +1,6 @@
 package com.iplease.server.ip.demand.status.manage.domain.status.service
 
+import com.iplease.server.ip.demand.status.manage.domain.admin.exception.UnknownDemandException
 import com.iplease.server.ip.demand.status.manage.domain.status.data.dto.IpDemandStatusDto
 import com.iplease.server.ip.demand.status.manage.global.status.data.table.IpDemandStatusTable
 import com.iplease.server.ip.demand.status.manage.global.status.data.type.DemandStatusType
@@ -17,14 +18,14 @@ class IpDemandStatusManageServiceImpl(
 
     private fun changeDemandStatusByUuid(demandUuid: Long, status: DemandStatusType) =
         ipDemandStatusRepository.findByDemandUuid(demandUuid)
-            .flatMap { checkExists(it) }
+            .flatMap { checkExists(it, demandUuid) }
             .flatMap { checkStatus(it, status) }
             .map { it.copy(status = status) }
             .flatMap { ipDemandStatusRepository.save(it) }
             .map { it.toDto() }
 
-    private fun checkExists(table: IpDemandStatusTable?): Mono<IpDemandStatusTable> =
-        table.let { it?.toMono() ?:Mono.error(IllegalArgumentException("demand status table is null")) }
+    private fun checkExists(table: IpDemandStatusTable?, demandUuid: Long): Mono<IpDemandStatusTable> =
+        table.let { it?.toMono() ?:Mono.error(UnknownDemandException(demandUuid)) }
 
     private fun checkStatus(table: IpDemandStatusTable, tobe: DemandStatusType): Mono<IpDemandStatusTable> =
             table.toMono()

@@ -1,5 +1,6 @@
 package com.iplease.server.ip.demand.status.manage.global.status.data.type
 
+import com.iplease.server.ip.demand.status.manage.global.status.exception.UnsupportedDemandStatusChangeException
 import reactor.core.publisher.Mono
 
 enum class DemandStatusType(
@@ -20,5 +21,5 @@ enum class DemandStatusType(
 
     fun canChangeTo(tobe: DemandStatusType) =
         if(canChangeTo.contains(tobe)) Mono.just(Unit)
-        else Mono.error(UnsupportedOperationException("$this can't change to $tobe"))
+        else Mono.error(UnsupportedDemandStatusChangeException(this, tobe))
 }
