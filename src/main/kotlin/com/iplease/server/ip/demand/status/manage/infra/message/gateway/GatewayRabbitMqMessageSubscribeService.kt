@@ -1,6 +1,7 @@
-package com.iplease.server.ip.demand.status.manage.infra.message.service
+package com.iplease.server.ip.demand.status.manage.infra.message.gateway
 
 import com.iplease.server.ip.demand.status.manage.infra.message.listener.MessageListener
+import com.iplease.server.ip.demand.status.manage.infra.message.service.MessageSubscribeService
 import org.slf4j.LoggerFactory
 import org.springframework.amqp.core.Message
 import org.springframework.amqp.rabbit.annotation.RabbitListener
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 
 @Service
-class GatewayRabbitMqMessageSubscribeService: MessageSubscribeService {
+class GatewayRabbitMqMessageSubscribeService: MessageSubscribeService, Gateway<MessageListener> {
     private val list = mutableSetOf<MessageListener>()
     private val logger = LoggerFactory.getLogger(this::class.java)
 
@@ -24,5 +25,5 @@ class GatewayRabbitMqMessageSubscribeService: MessageSubscribeService {
             .onErrorContinue{ ex, _ -> logger.error(ex.message) } //RabbitMQ 메세지 구독중 발생한 모든 오류는 로깅이후 무시한다. (무한loop 방지)
             .subscribe()
     }
-    fun addListener(listener: MessageListener) { list.add(listener) }
+    override fun add(handler: MessageListener) { list.add(handler) }
 }
