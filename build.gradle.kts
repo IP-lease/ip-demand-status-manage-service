@@ -30,7 +30,7 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation("io.github.key-del-jeeinho:messa-lib:1.0.1-RELEASE")
+    implementation("io.github.key-del-jeeinho:messa-lib:1.0.3-RELEASE")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
