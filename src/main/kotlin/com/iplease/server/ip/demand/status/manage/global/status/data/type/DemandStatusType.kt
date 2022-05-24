@@ -1,4 +1,4 @@
-package com.iplease.server.ip.demand.status.manage.domain.admin.data.type
+package com.iplease.server.ip.demand.status.manage.global.status.data.type
 
 enum class DemandStatusType {
     //상태가 처음 등록되었을 경우 CREATE

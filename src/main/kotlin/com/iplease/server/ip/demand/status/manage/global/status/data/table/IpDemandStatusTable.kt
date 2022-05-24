@@ -1,6 +1,6 @@
-package com.iplease.server.ip.demand.status.manage.domain.admin.data.table
+package com.iplease.server.ip.demand.status.manage.global.status.data.table
 
-import com.iplease.server.ip.demand.status.manage.domain.admin.data.type.DemandStatusType
+import com.iplease.server.ip.demand.status.manage.global.status.data.type.DemandStatusType
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 

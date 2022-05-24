@@ -1,10 +1,10 @@
-package com.iplease.server.ip.demand.status.manage.global.error.type.listener
+package com.iplease.server.ip.demand.status.manage.domain.status.listener
 
 import com.iplease.lib.messa.error.type.IpDemandErrorTypeV1
 import com.iplease.lib.messa.event.data.ip.demand.status.IpDemandStatusRejectEvent
 import com.iplease.lib.messa.event.type.IpDemandEventTypeV1
-import com.iplease.server.ip.demand.status.manage.domain.admin.data.type.DemandStatusType
-import com.iplease.server.ip.demand.status.manage.domain.admin.repository.IpDemandStatusRepository
+import com.iplease.server.ip.demand.status.manage.global.status.data.type.DemandStatusType
+import com.iplease.server.ip.demand.status.manage.global.status.repository.IpDemandStatusRepository
 import com.iplease.server.ip.demand.status.manage.infra.message.gateway.Gateway
 import com.iplease.server.ip.demand.status.manage.infra.message.listener.MessageListener
 import com.iplease.server.ip.demand.status.manage.infra.message.listener.SimpleMessageListener

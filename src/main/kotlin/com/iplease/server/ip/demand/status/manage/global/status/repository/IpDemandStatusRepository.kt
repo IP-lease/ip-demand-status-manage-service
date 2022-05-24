@@ -1,6 +1,6 @@
-package com.iplease.server.ip.demand.status.manage.domain.admin.repository
+package com.iplease.server.ip.demand.status.manage.global.status.repository
 
-import com.iplease.server.ip.demand.status.manage.domain.admin.data.table.IpDemandStatusTable
+import com.iplease.server.ip.demand.status.manage.global.status.data.table.IpDemandStatusTable
 import org.springframework.data.r2dbc.repository.R2dbcRepository
 import reactor.core.publisher.Mono
 
