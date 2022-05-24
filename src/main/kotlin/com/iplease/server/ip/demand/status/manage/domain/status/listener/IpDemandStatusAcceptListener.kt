@@ -19,7 +19,7 @@ class IpDemandStatusAcceptListener(
     private val ipDemandStatusManageService: IpDemandStatusManageService
 ):  SimpleMessageListener<IpDemandStatusAcceptEvent>(
     IpDemandStatusAcceptEvent::class,
-    IpDemandEventTypeV1.IP_DEMAND_STATUS_REJECT.routingKey,
+    IpDemandEventTypeV1.IP_DEMAND_STATUS_ACCEPT.routingKey,
     messagePublishService,
     messageListenerGateway
 ) {
