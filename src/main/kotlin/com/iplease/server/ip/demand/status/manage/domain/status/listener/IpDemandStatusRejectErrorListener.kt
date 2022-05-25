@@ -1,6 +1,6 @@
 package com.iplease.server.ip.demand.status.manage.domain.status.listener
 
-import com.iplease.lib.messa.error.data.ip.demand.status.IpDemandStatusAcceptError
+import com.iplease.lib.messa.error.data.ip.demand.status.IpDemandStatusRejectError
 import com.iplease.lib.messa.error.type.IpDemandErrorTypeV1
 import com.iplease.server.ip.demand.status.manage.domain.status.service.IpDemandStatusManageService
 import com.iplease.server.ip.demand.status.manage.infra.message.gateway.Gateway
@@ -11,17 +11,17 @@ import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
 
 @Component
-class IpDemandStatusAcceptErrorListener(
+class IpDemandStatusRejectErrorListener(
     messagePublishService: MessagePublishService,
     messageListenerGateway: Gateway<MessageListener>,
     private val ipDemandStatusManageService: IpDemandStatusManageService
-): SimpleMessageListener<IpDemandStatusAcceptError>(
-    IpDemandStatusAcceptError::class,
-    IpDemandErrorTypeV1.IP_DEMAND_STATUS_ACCEPT.routingKey,
+): SimpleMessageListener<IpDemandStatusRejectError>(
+    IpDemandStatusRejectError::class,
+    IpDemandErrorTypeV1.IP_DEMAND_STATUS_REJECT.routingKey,
     messagePublishService,
     messageListenerGateway
 ) {
-    override fun handle(data: IpDemandStatusAcceptError) {
+    override fun handle(data: IpDemandStatusRejectError) {
         ipDemandStatusManageService.rollbackStatus(data.demandUuid)
             //TODO doOnError로 로깅로직 작성
             .onErrorResume { Mono.empty() }
