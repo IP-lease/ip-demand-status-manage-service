@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
 
 @Component
-class IpDemandStatusRejectListener(
+class IpDemandStatusRejectEventListener(
     private val messagePublishService: MessagePublishService,
     messageListenerGateway: Gateway<MessageListener>,
     private val ipDemandStatusManageService: IpDemandStatusManageService

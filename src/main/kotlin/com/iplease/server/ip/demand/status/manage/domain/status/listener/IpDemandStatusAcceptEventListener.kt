@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
 
 @Component
-class IpDemandStatusAcceptListener(
+class IpDemandStatusAcceptEventListener(
     private val messagePublishService: MessagePublishService,
     messageListenerGateway: Gateway<MessageListener>,
     private val ipDemandStatusManageService: IpDemandStatusManageService
