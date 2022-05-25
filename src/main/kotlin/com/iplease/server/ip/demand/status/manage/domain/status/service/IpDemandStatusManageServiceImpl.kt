@@ -15,11 +15,12 @@ class IpDemandStatusManageServiceImpl(
 ): IpDemandStatusManageService {
     override fun reject(demandUuid: Long): Mono<IpDemandStatusDto> = changeDemandStatusByUuid(demandUuid, DemandStatusType.REJECT)
     override fun accept(demandUuid: Long): Mono<IpDemandStatusDto> = changeDemandStatusByUuid(demandUuid, DemandStatusType.ACCEPT)
+    override fun rollbackStatus(demandUuid: Long): Mono<IpDemandStatusDto> = changeDemandStatusByUuid(demandUuid, DemandStatusType.CREATE, false) //TODO messa-lib 수정 후 리팩토링
 
-    private fun changeDemandStatusByUuid(demandUuid: Long, status: DemandStatusType) =
+    private fun changeDemandStatusByUuid(demandUuid: Long, status: DemandStatusType, checkStatus: Boolean = true) =
         ipDemandStatusRepository.findByDemandUuid(demandUuid)
             .flatMap { checkExists(it, demandUuid) }
-            .flatMap { checkStatus(it, status) }
+            .flatMap { if(checkStatus) checkStatus(it, status) else it.toMono() }
             .map { it.copy(status = status) }
             .flatMap { ipDemandStatusRepository.save(it) }
             .map { it.toDto() }

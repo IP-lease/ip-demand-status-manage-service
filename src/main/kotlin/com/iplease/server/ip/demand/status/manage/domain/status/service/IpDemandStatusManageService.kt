@@ -6,4 +6,5 @@ import reactor.core.publisher.Mono
 interface IpDemandStatusManageService {
     fun reject(demandUuid: Long): Mono<IpDemandStatusDto>
     fun accept(demandUuid: Long): Mono<IpDemandStatusDto>
+    fun rollbackStatus(demandUuid: Long): Mono<IpDemandStatusDto>
 }
